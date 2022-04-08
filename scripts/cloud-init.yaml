@@ -7,3 +7,4 @@ runcmd:
   - export SQLPASS=$(cat /home/bitnami/bitnami_credentials | sed -n '4 p' | cut -d "'" -f 2)
   - /opt/bitnami/mariadb/bin/mysql -u root -p$SQLPASS -e 'create database loginsqli'
   - /opt/bitnami/mariadb/bin/mysql -u root -p$SQLPASS loginsqli < /opt/bitnami/apache2/htdocs/simpleloginsqli.sql
+  - sed -i "s/CHANGEME/$SQLPASS/g" /opt/bitnami/apache2/htdocs/db_config.php
