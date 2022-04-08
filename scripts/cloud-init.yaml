@@ -1,5 +1,10 @@
 #cloud-config
 # Delete default file
+packages:
+  - git
+
 runcmd:
   - rm -rf /home/bitnami/htdocs/index.html
   - git clone https://github.com/k4ved/sqlinjectionloginbypass.git /opt/bitnami/apache2/htdocs/
+  - export SQLPASS=$(cat /home/bitnami/bitnami_credentials | sed -n '4 p' | cut -d "'" -f 2)
+  - mysql -u root -p$SQLPASS -e 'create database loginsqli'
