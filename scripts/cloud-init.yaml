@@ -1,4 +1,5 @@
-# Installing a custom system package
+#cloud-config
+# Delete default file
 runcmd:
-  - sudo apt-get update && sudo apt-get install -y python3-mysqldb python-mysqldb
   - rm -rf /home/bitnami/htdocs/index.html
+  - git clone https://github.com/k4ved/sqlinjectionloginbypass.git /home/bitnami/htdocs/
